@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './User.css'
 
 const User = ({
   name,
@@ -6,8 +7,11 @@ const User = ({
   location,
   picture
 }) => (
-  <li>
-    <div>{name.first} {name.last}</div>
+  <li className={styles.userBox}>
+    <img src={picture.medium} />
+    <div className={styles.name}>{name.first} {name.last}</div>
+    <div className={styles.info}>DOB: {dob.slice(0,10).split('-').join('/')}</div>
+    <div className={styles.info}>City {location.city}</div>
   </li>
 );
 
