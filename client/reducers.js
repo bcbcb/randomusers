@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 
 import {
   REQUEST_USERS,
-  RECEIVE_USERS
+  RECEIVE_USERS,
+  SORT_BY_LASTNAME
 } from './actions'
 
 
@@ -20,7 +21,11 @@ function usersReducer (state = {
     case RECEIVE_USERS:
       return Object.assign({}, state, {
         isFetching: false,
-        users: action.users
+        users: action.users.sort((a, b) => {
+          if (a.name.first < b.name.first) return -1
+          if (a.name.first > b.name.first) return 1
+          return 0
+        })
       })
 
     default:
