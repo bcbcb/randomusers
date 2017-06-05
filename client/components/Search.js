@@ -1,5 +1,12 @@
 import React from 'react'
 
-const Search = () => <div>Search</div>
+const Search = ({handleSearch}) => {
+  return (
+    <div>
+      <input type='text' onChange={handleSearch} />
+    </div>
+  )
+}
+
 
 export default Search

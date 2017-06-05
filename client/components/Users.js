@@ -4,11 +4,11 @@ import User from './User'
 import styles from './Users.css'
 
 const Users = ({ users }) => {
-  const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
-  const usersByLetter = letters.map(
+  const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
+  const usersByLetter = ALPHABET.map(
     letter => {
       return {
-        letter: letter,
+        letter,
         users: users.filter(user => (user.name.first.charAt(0) === letter))
       }
     }
@@ -18,7 +18,7 @@ const Users = ({ users }) => {
     <div>
       {usersByLetter.map(letter => (
         letter.users.length > 0 &&
-        <div>
+        <div key={letter.letter}>
           <div className={styles.letter}>
             {letter.letter.toUpperCase()}
           </div>

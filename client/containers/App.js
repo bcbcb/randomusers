@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers } from '../actions'
+import {
+  fetchUsers,
+  filterUsers
+} from '../actions'
 
 import Search from '../components/Search'
 import Sort from '../components/Sort'
@@ -12,25 +15,33 @@ import styles from './App.css'
 class App extends Component {
   constructor(props) {
     super(props)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount() {
     this.props.dispatch(fetchUsers())
   }
 
+  handleSearch(e) {
+    const str = e.target.value
+    this.props.dispatch(filterUsers(str))
+  }
+
   render() {
     const {
       isFetching,
-      users
+      filteredUsers
     } = this.props
 
     return (
       <div className={styles.app}>
 
+        <Search handleSearch={this.handleSearch}/>
+
         {isFetching ?
           <Loading />
           :
-          <Users users={users} />
+          <Users users={filteredUsers} />
         }
 
       </div>
@@ -42,12 +53,12 @@ class App extends Component {
 function mapStateToProps (state) {
   const {
     isFetching,
-    users
+    filteredUsers
   } = state.usersReducer
 
   return {
     isFetching,
-    users
+    filteredUsers
   }
 }
 

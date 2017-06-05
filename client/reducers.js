@@ -3,13 +3,14 @@ import { combineReducers } from 'redux'
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
-  SORT_BY_LASTNAME
+  FILTER_USERS
 } from './actions'
 
 
 function usersReducer (state = {
   isFetching: false,
-  users: []
+  users: [],
+  filteredUsers: []
 }, action) {
   switch (action.type) {
 
@@ -21,10 +22,16 @@ function usersReducer (state = {
     case RECEIVE_USERS:
       return Object.assign({}, state, {
         isFetching: false,
-        users: action.users.sort((a, b) => {
-          if (a.name.first < b.name.first) return -1
-          if (a.name.first > b.name.first) return 1
-          return 0
+        users: action.users
+      })
+
+    case FILTER_USERS:
+      return Object.assign({}, state, {
+        filteredUsers: state.users.filter((user) => {
+          let str = action.str || ''
+          str = str.toLowerCase()
+          const { first, last } = user.name
+          return first.includes(str) || last.includes(str)
         })
       })
 
