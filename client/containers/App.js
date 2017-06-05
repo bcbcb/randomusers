@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   fetchUsers,
-  filterUsers
+  filterUsers,
+  sortUsers
 } from '../actions'
 
 import Search from '../components/Search'
@@ -16,6 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSort = this.handleSort.bind(this)
   }
 
   componentDidMount() {
@@ -23,20 +25,27 @@ class App extends Component {
   }
 
   handleSearch(e) {
-    const str = e.target.value
-    this.props.dispatch(filterUsers(str))
+    this.props.dispatch(filterUsers(e.target.value))
+  }
+
+  handleSort(e) {
+    this.props.dispatch(sortUsers(e.target.value))
   }
 
   render() {
     const {
       isFetching,
-      filteredUsers
+      filteredUsers,
+      sortBy
     } = this.props
 
     return (
       <div className={styles.app}>
 
-        <Search handleSearch={this.handleSearch}/>
+        <div className={styles.head}>
+          <Search handleSearch={this.handleSearch} />
+          <Sort handleSort={this.handleSort} sortBy={sortBy} />
+        </div>
 
         {isFetching ?
           <Loading />
@@ -53,12 +62,14 @@ class App extends Component {
 function mapStateToProps (state) {
   const {
     isFetching,
-    filteredUsers
+    filteredUsers,
+    sortBy
   } = state.usersReducer
 
   return {
     isFetching,
-    filteredUsers
+    filteredUsers,
+    sortBy
   }
 }
 

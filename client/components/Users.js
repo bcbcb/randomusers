@@ -5,11 +5,12 @@ import styles from './Users.css'
 
 const Users = ({ users }) => {
   const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
   const usersByLetter = ALPHABET.map(
     letter => {
       return {
         letter,
-        users: users.filter(user => (user.name.first.charAt(0) === letter))
+        users: users.filter(user => (user.name.full.charAt(0) === letter))
       }
     }
   )
@@ -23,7 +24,12 @@ const Users = ({ users }) => {
             {letter.letter.toUpperCase()}
           </div>
           <ul className={styles.list}>
-            {letter.users.map(user => <User {...user} key={user.login.salt} />)}
+            {letter.users.map(user => (
+              <User
+                {...user}
+                key={user.login.salt}
+              />)
+            )}
           </ul>
         </div>
         )
