@@ -14,6 +14,7 @@ function usersReducer (state = {
   isFetching: false,
   users: [],
   filteredUsers: [],
+  query: '',
   modalUser: null
 }, action) {
   switch (action.type) {
@@ -30,6 +31,7 @@ function usersReducer (state = {
 
     case FILTER_USERS:
       return Object.assign({}, state, {
+        query: action.query.toLowerCase(),
         filteredUsers: state.users
           .filter(user => {
             let query = action.query || ''
@@ -51,6 +53,7 @@ function usersReducer (state = {
             }
             return user
           })
+          .filter(user => user.name.full.includes(state.query))
       })
 
     case SHOW_MODAL:
