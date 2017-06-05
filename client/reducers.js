@@ -30,15 +30,13 @@ function usersReducer (state = {
       })
 
     case FILTER_USERS:
+      const query = action.query.toLowerCase()
       return Object.assign({}, state, {
-        query: action.query.toLowerCase(),
-        filteredUsers: state.users
-          .filter(user => {
-            let query = action.query || ''
-            query = query.toLowerCase()
-            return user.name.full.includes(query)
-          })
-      })
+          query: query,
+          filteredUsers: state.users
+            .filter(user => user.name.full.includes(query))
+        }
+      )
 
     case BUILD_FULL_NAMES:
       return Object.assign({}, state, {
