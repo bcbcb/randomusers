@@ -4,14 +4,17 @@ import {
   REQUEST_USERS,
   RECEIVE_USERS,
   FILTER_USERS,
-  BUILD_FULL_NAMES
+  BUILD_FULL_NAMES,
+  SHOW_MODAL,
+  HIDE_MODAL
 } from './actions'
 
 
 function usersReducer (state = {
   isFetching: false,
   users: [],
-  filteredUsers: []
+  filteredUsers: [],
+  modalUser: null
 }, action) {
   switch (action.type) {
 
@@ -49,6 +52,17 @@ function usersReducer (state = {
             }
             return user
           })
+      })
+
+    case SHOW_MODAL:
+      console.log('showing?');
+      return Object.assign({}, state, {
+        modalUser: action.user
+      })
+
+    case HIDE_MODAL:
+      return Object.assign({}, state, {
+        modalUser: null
       })
 
     default:

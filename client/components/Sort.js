@@ -6,13 +6,23 @@ const Sort = ({ handleSort, sortBy }) => {
       <div>Sort By</div>
       <div>
         <label>
-          <input type="radio" value="last" checked={sortBy === 'last'} onChange={handleSort} />
+          <input
+            type="radio"
+            value="last"
+            checked={sortBy === 'last'}
+            onChange={handleSort}
+          />
           Last name
         </label>
       </div>
       <div>
         <label>
-          <input type="radio" value="first" checked={sortBy === 'first'} onChange={handleSort} />
+          <input
+            type="radio"
+            value="first"
+            checked={sortBy === 'first'}
+            onChange={handleSort}
+          />
           First Name
         </label>
       </div>

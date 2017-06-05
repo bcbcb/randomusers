@@ -4,6 +4,8 @@ export const REQUEST_USERS = 'REQUEST_USERS'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const FILTER_USERS = 'FILTER_USERS'
 export const BUILD_FULL_NAMES = 'BUILD_FULL_NAMES'
+export const SHOW_MODAL = 'SHOW_MODAL'
+export const HIDE_MODAL = 'HIDE_MODAL'
 
 const NUMBER_OF_RESULTS = 100
 
@@ -42,5 +44,18 @@ export function sortUsers(sortBy) {
   return {
     type: BUILD_FULL_NAMES,
     sortBy
+  }
+}
+
+export function showModal(user) {
+  return {
+    type: SHOW_MODAL,
+    user
+  }
+}
+
+export function hideModal() {
+  return {
+    type: HIDE_MODAL,
   }
 }

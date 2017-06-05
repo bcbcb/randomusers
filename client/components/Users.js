@@ -3,7 +3,10 @@ import User from './User'
 
 import styles from './Users.css'
 
-const Users = ({ users }) => {
+const Users = ({
+  users,
+  showModal
+}) => {
   const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
   const usersByLetter = ALPHABET.map(
@@ -18,19 +21,25 @@ const Users = ({ users }) => {
   return (
     <div>
       {usersByLetter.map(letter => (
+
         letter.users.length > 0 &&
+
         <div key={letter.letter}>
+
           <div className={styles.letter}>
             {letter.letter.toUpperCase()}
           </div>
+
           <ul className={styles.list}>
             {letter.users.map(user => (
               <User
-                {...user}
+                userData={user}
                 key={user.login.salt}
+                showModal={showModal}
               />)
             )}
           </ul>
+
         </div>
         )
       )}
