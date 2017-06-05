@@ -3,17 +3,16 @@ import User from './User'
 
 import styles from './Users.css'
 
-const Users = ({
-  users,
-  showModal
-}) => {
-  const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
+const Users = ({ users, showModal }) => {
 
   const usersByLetter = ALPHABET.map(
     letter => {
       return {
         letter,
-        users: users.filter(user => (user.name.full.charAt(0) === letter))
+        users: users
+          .filter(user => (user.name.full.charAt(0) === letter))
       }
     }
   )

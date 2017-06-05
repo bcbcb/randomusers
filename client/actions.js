@@ -13,10 +13,11 @@ export function fetchUsers() {
   return dispatch => {
     dispatch(requestUsers())
     return fetch(`https://randomuser.me/api/?nat=us&results=${NUMBER_OF_RESULTS}`)
-    .then(response => response.json())
-    .then(json => dispatch(receiveUsers(json.results)))
-    .then(() => dispatch(filterUsers('')))
-    .then(() => dispatch(sortUsers('last')))
+      .then(response => response.json())
+      .then(json => dispatch(receiveUsers(json.results)))
+      .then(() => dispatch(sortUsers('last')))
+      .then(() => dispatch(filterUsers('')))
+      .catch((e) => { console.log(e) })
   }
 }
 
@@ -33,10 +34,10 @@ export function receiveUsers(users) {
   }
 }
 
-export function filterUsers(str) {
+export function filterUsers(query) {
   return {
     type: FILTER_USERS,
-    str
+    query
   }
 }
 

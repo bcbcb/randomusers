@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import {
   fetchUsers,
   filterUsers,
@@ -42,7 +43,6 @@ class App extends Component {
   }
 
   hideModal() {
-    console.log('hding');
     this.props.dispatch(hideModal())
   }
 
@@ -81,7 +81,6 @@ class App extends Component {
           }
 
         </div>
-
 
       </div>
     )

@@ -32,10 +32,9 @@ function usersReducer (state = {
       return Object.assign({}, state, {
         filteredUsers: state.users
           .filter(user => {
-            let str = action.str || ''
-            str = str.toLowerCase()
-            const { first, last } = user.name
-            return first.includes(str) || last.includes(str)
+            let query = action.query || ''
+            query = query.toLowerCase()
+            return user.name.full.includes(query)
           })
       })
 
@@ -55,7 +54,6 @@ function usersReducer (state = {
       })
 
     case SHOW_MODAL:
-      console.log('showing?');
       return Object.assign({}, state, {
         modalUser: action.user
       })
