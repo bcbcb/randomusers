@@ -14,9 +14,11 @@ export function fetchUsers() {
     dispatch(requestUsers())
     return fetch(`https://randomuser.me/api/?nat=us&results=${NUMBER_OF_RESULTS}`)
       .then(response => response.json())
-      .then(json => dispatch(receiveUsers(json.results)))
-      .then(() => dispatch(sortUsers('last')))
-      .then(() => dispatch(filterUsers('')))
+      .then(json => {
+        dispatch(receiveUsers(json.results))
+        dispatch(sortUsers('last'))
+        dispatch(filterUsers(''))
+      })
       .catch((e) => { console.log(e) })
   }
 }
